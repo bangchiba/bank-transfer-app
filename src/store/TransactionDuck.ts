@@ -1,29 +1,29 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
-import { BankTransferList } from '../types';
+import { TransactionList } from '../types';
 
 export interface BankTransferInitialState {
-  bankTransferList: BankTransferList;
+  transactionList: TransactionList;
 }
 
 export const initialState: BankTransferInitialState = {
-  bankTransferList: [] as BankTransferList,
+  transactionList: [] as TransactionList,
 };
 
 const STORE_BANK_TRANSFER = 'STORE_BANK_TRANSFER';
 
-export const getBankTransferState: (state: any) => BankTransferList = (
+export const getBankTransferState: (state: any) => TransactionList = (
   state: BankTransferInitialState
-) => state.bankTransferList;
+) => state.transactionList;
 
 export const storeBankTransfer = createAction(
   STORE_BANK_TRANSFER,
-  (payload: BankTransferList) => ({
+  (payload: TransactionList) => ({
     payload: [ ...payload ],
   })
 );
 
 export default createReducer(initialState, {
   [STORE_BANK_TRANSFER]: (state, action) => {
-    state.bankTransferList = action.payload;
+    state.transactionList = action.payload;
   },
 });

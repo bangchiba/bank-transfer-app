@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { MainLayout } from './components/layout';
-import { BankTransfer } from './components/modules/BankTransfer';
+import { Transaction } from './components/modules/Transaction';
 import store from './store';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Switch>
         <MainLayout>
-          <Route path="/" exact component={BankTransfer} />
+          <Route path="/" exact component={Transaction} />
           {/* <Route path="/detail/:imdbID" component={MovieDetail} /> */}
         </MainLayout>
       </Switch>

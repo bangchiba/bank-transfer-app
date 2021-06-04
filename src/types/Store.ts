@@ -1,5 +1,5 @@
-import { BankTransferList } from './BankTransfer';
+import { TransactionList } from './Transaction';
 
 export interface Store {
-  bankTransferList: BankTransferList;
+  transactionList: TransactionList;
 }

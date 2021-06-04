@@ -1,2 +1,2 @@
-export * from './BankTransfer';
+export * from './Transaction';
 export * from './Store';

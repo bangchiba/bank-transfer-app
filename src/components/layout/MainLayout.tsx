@@ -4,7 +4,9 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="container">{children}</div>
+    <div className="container">
+      <div className="children">{children}</div>
+    </div>
   )
 }
 

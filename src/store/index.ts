@@ -1,8 +1,8 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import bankTransferDuck from './BankTransferDuck';
+import TransactionDuck from './TransactionDuck';
 
 const reducer = combineReducers({
-  bankTransferList: bankTransferDuck,
+  transactionList: TransactionDuck,
 });
 
 const store = configureStore({
