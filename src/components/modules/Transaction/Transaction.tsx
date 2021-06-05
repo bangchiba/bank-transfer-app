@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { List } from '../../uikit';
 import { storeBankTransfer, getBankTransferState } from '../../../store/TransactionDuck';
 import { Store, TransactionList, Transaction as TransactionProps } from '../../../types';
+import { currency } from '../../../helper';
 
 interface Props {
   transactionList: TransactionList;
@@ -17,7 +19,7 @@ interface Props {
 
 const Transaction = (props: Props) => {
   const { storeBankTransferAction, transactionList } = props;
-  console.log('props', props);
+  const [totalAmount, setTotalAmout] = useState<number>(0);
 
   const getBankTransfer = async() => {
     try {
@@ -28,31 +30,50 @@ const Transaction = (props: Props) => {
       console.log(error)
     }
   }
+
+  const getTotalAmount = () => {
+    const total = transactionList.reduce((total, each) => {
+      return total + each.amount;
+    },0)
+    setTotalAmout(total)
+  }
+
+  const changeFilter = (e: any) => {
+    // TODO
+  }
   
   useEffect(() => {
-    getBankTransfer();
+    if (transactionList.length === 0) {
+      getBankTransfer();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
+  useEffect(() => {
+    getTotalAmount();
+  }, [transactionList])
 
   return (
     <div>
       <h1 className="title">Daftar Transaksi</h1>
       <div className="message">
         <h2>Halo Kak!</h2>
-        <p>Kamu telah melakukan transaksi sebesar Rp. 5.000.000 sejak menggunakan flip</p>
+        <p>Kamu telah melakukan transaksi sebesar <span className="total-amount">{currency(totalAmount)}</span> sejak menggunakan flip</p>
       </div>
       <div className="box-filter">
         <input className="search" type="text" placeholder="Cari nama atau bank" />
-        <select name="filter">
+        <select name="filter" onChange={(e) => changeFilter(e)}>
           <option>Urutkan</option>
-          <option>Nama A-Z</option>
-          <option>Nama Z-A</option>
-          <option>Tanggal Terbaru</option>
-          <option>Tanggal Terlama</option>
+          <option value="name_asc">Nama A-Z</option>
+          <option value="name_desc">Nama Z-A</option>
+          <option value="date_asc">Tanggal Terbaru</option>
+          <option value="date_desc">Tanggal Terlama</option>
         </select>
       </div>
       {transactionList.length > 0 && (
-        transactionList.map((each: TransactionProps) => <List key={each.id} value={each} />)
+        transactionList.map((each: TransactionProps) => {
+          return <List key={each.id} value={each} />;
+        })
       )}
     </div>
   )

@@ -5,8 +5,26 @@
   padding: 0;
 }
 
+%status {
+  background-color: #56b586;
+  color: #fff;
+}
+
 body {
   font-family: 'Lato', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  line-height: 1.2rem;
 }
 
 .container {
@@ -49,6 +67,13 @@ body {
   }
 }
 
+.status {
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 15px;
+}
+
 .list {
   margin: 5px 0px;
   padding: 10px;
@@ -58,18 +83,10 @@ body {
   align-items: center;
   border-radius: 5px;
 
-  .status {
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 15px;
-  }
-
   &.success {
     border-left: 5px solid #56b586;
     .status {
-      background-color: #56b586;
-      color: #fff;
+      @extend %status;
     }
   }
 
@@ -79,4 +96,71 @@ body {
       border: 1px solid #fd6542;
     }
   }
+
+  .amount {
+    display: flex;
+    align-items: center;
+    p:nth:child(1) {
+      margin-right: 10px;
+    }
+  }
+
+  .left {
+    > p:nth-child(1) {
+      font-weight: 600;
+    }
+    > p:nth-child(2){
+      text-transform: uppercase;
+    }
+  }
+}
+
+.card-header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 5px;
+  margin-bottom: 20px;
+  p {
+    font-weight: 600;
+  }
+  
+  .status {
+    @extend .status;
+    @extend %status;
+  }
+}
+
+.card-detail {
+  background-color: #fff;
+  padding: 10px 5px;
+  margin-bottom: 20px;
+
+  li {
+    margin: 15px 0px;
+
+    p:nth-child(1) {
+      font-weight: 600;
+    }
+  }
+}
+
+.button {
+  padding: 8px 10px;
+  border: 1px solid #fd6542;
+  color: #fd6542;
+  border-radius: 5px;
+}
+
+.total-amount {
+  color: #fd6542;
+}
+
+.dot {
+  height: 6px;
+  width: 6px;
+  background-color: #000;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0px 10px;
 }
